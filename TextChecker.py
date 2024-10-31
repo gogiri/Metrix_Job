@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import scrolledtext
+import webbrowser  # 웹 브라우저 모듈
 
 # NIA 정제 창
 def nia_refine_window():
@@ -66,6 +68,7 @@ def open_nia_window():
 
 import tkinter as tk
 from tkinter import scrolledtext
+import webbrowser
 
 # 기호를 교체하는 함수 정의
 def replace_alternating_symbols(text):
@@ -98,6 +101,18 @@ def open_nipa_window():
         widget.destroy()  # 기존 창의 위젯들을 모두 삭제
     root.title("NIPA 작업 툴")
 
+    # 가이드라인 제목 추가
+    guideline_label = tk.Label(root, text="가이드라인", font=("Arial", 14, "bold"))
+    guideline_label.pack(pady=10)
+    
+    # 링크 버튼을 생성하여 클릭 시 브라우저에서 열리도록 함
+    def open_link():
+        webbrowser.open("https://buly.kr/BeJ74FT")
+
+    # 링크 버튼을 생성
+    link_button = tk.Button(root, text="https://buly.kr/BeJ74FT", fg="blue", cursor="hand2", command=open_link)
+    link_button.pack(pady=10)
+    
     # 중요한 메모 텍스트 추가
     memo_text = (
         "&& : 표시 글 제목 및 저자, 목차\n"
@@ -105,9 +120,14 @@ def open_nipa_window():
         "## : 머리말, 꼬리말 (페이지 번호만 있는 경우 포함)\n"
         "$$ : 각주/미주"
     )
-    memo_label = tk.Label(root, text=memo_text, font=("Arial", 12), justify=tk.LEFT)
-    memo_label.pack(pady=10)
+    # 메모 텍스트 활성화 (ScrolledText로 변경)
+    memo_label = tk.Label(root, text="메모:", font=("Arial", 12), justify=tk.LEFT)
+    memo_label.pack(pady=5)
 
+    memo_field = scrolledtext.ScrolledText(root, wrap=tk.WORD, width=50, height=6)
+    memo_field.insert(tk.END, memo_text)
+    memo_field.pack(pady=10)
+    
     # 입력 필드 라벨
     input_label = tk.Label(root, text="각주/미주 텍스트를 입력하세요:")
     input_label.pack(pady=10)
@@ -158,26 +178,6 @@ def open_main_window():
     nipa_button.pack(pady=20)
 
 # Tkinter 윈도우 생성 및 시작 화면 호출
-root = tk.Tk()
-open_main_window()  # 메인 화면을 첫 화면으로 설정
-root.mainloop()
-
-
-# 메인 화면 창
-def open_main_window():
-    for widget in root.winfo_children():
-        widget.destroy()  # 기존 창의 위젯들을 모두 삭제
-    root.title("텍스트체커 - 시작 인터페이스")
-
-    # NIA 작업 툴로 이동하는 버튼
-    nia_button = tk.Button(root, text="NIA 작업 툴로 이동", command=open_nia_window, width=30, height=2)
-    nia_button.pack(pady=20)
-
-    # NIPA 작업 툴로 이동하는 버튼
-    nipa_button = tk.Button(root, text="NIPA 작업 툴로 이동", command=open_nipa_window, width=30, height=2)
-    nipa_button.pack(pady=20)
-
-# 메인 Tkinter 윈도우 생성 및 시작 화면 호출
 root = tk.Tk()
 open_main_window()  # 메인 화면을 첫 화면으로 설정
 root.mainloop()
