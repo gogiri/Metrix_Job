@@ -9,7 +9,8 @@
 
 
 
-![image](https://github.com/user-attachments/assets/8039df63-aa5c-4404-8216-a747ff9f218c)
+![image](https://github.com/user-attachments/assets/924a8395-bae4-439e-991b-c842df4fa002)
+
 
 
 #### GUI 추가, 터미널에서 복사/붙여넣기 시 ENTER로 인한 자동실행 문제해결 (2024-10-29 update) 
