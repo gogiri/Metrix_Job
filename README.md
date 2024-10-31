@@ -7,9 +7,9 @@
 1. input data -> 미주/각주 텍스트
 2. output data -> text 파일에서 를 순차적으로 『 , 』으로 변환
 
---2024.10.29 터미널에서 복사/붙여넣기 시 ENTER로 인한 자동실행 문제 해결
+
 
 ![image](https://github.com/user-attachments/assets/8039df63-aa5c-4404-8216-a747ff9f218c)
 
 
-#### GUI 추가 (2024-10-29 update)
+#### GUI 추가, 터미널에서 복사/붙여넣기 시 ENTER로 인한 자동실행 문제해결 (2024-10-29 update) 
