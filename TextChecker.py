@@ -73,7 +73,7 @@ import webbrowser
 # 기호를 교체하는 함수 정의
 def replace_alternating_symbols(text):
     # 변경할 기호 설정
-    search_symbol = ''
+    search_symbols = ['', '󰡔', '󰡕']  # 처리할 문자 정의
     replacements = ['『', '』']
     
     # 기호를 교체할 인덱스 (0: 『, 1: 』)
@@ -84,7 +84,7 @@ def replace_alternating_symbols(text):
     
     # 텍스트 순차적으로 탐색
     for char in text:
-        if char == search_symbol:
+        if char in search_symbols:
             # 기호를 교체하고 인덱스 교체
             new_text += replacements[replacement_index]
             # 인덱스를 0과 1 사이에서 반복
@@ -94,6 +94,14 @@ def replace_alternating_symbols(text):
             new_text += char
     
     return new_text
+
+
+# 와  기호를 ｢와｣로 교체하는 함수
+def replace_symbols(text):
+    # Replace  with ｢ and  with ｣
+    text = text.replace('', '｢').replace('', '｣')
+    return text
+
 
 # NIPA 작업 툴 창
 def open_nipa_window():
@@ -149,6 +157,7 @@ def open_nipa_window():
         input_data = input_text.get("1.0", tk.END).strip()
         # 기호 교체 함수 실행
         output_data = replace_alternating_symbols(input_data)
+        output_data = replace_symbols(output_data)  # 추가된 replace_symbols 적용
         # 결과를 출력 필드에 삽입
         output_text.config(state='normal')
         output_text.delete("1.0", tk.END)
