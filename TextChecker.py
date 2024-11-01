@@ -102,6 +102,36 @@ def replace_symbols(text):
     text = text.replace('', '｢').replace('', '｣')
     return text
 
+# 엔터 + 스페이스바를 %%로 변환하는 함수 추가
+def add_paragraph_symbol(text):
+    # 줄 바꿈 후 공백이 있을 경우 %%로 변환
+    lines = text.splitlines()
+    new_lines = []
+    for line in lines:
+        if line.strip() == "":  # 빈 줄일 경우
+            new_lines.append("%%")
+        else:
+            new_lines.append(line)
+    return "\n".join(new_lines)
+
+# 첫 줄에 ##을 추가하고 두 번째 줄 시작에 @@을 추가하는 함수
+def add_paragraph_symbol(text):
+    lines = text.splitlines()
+    new_lines = []
+
+    # 첫 번째 줄에 ## 추가
+    if lines:
+        new_lines.append("## " + lines[0])  # 첫 번째 줄 앞에 ## 추가
+
+    # 두 번째 줄에 @@ 추가
+    if len(lines) > 1:
+        new_lines.append("@@ " + lines[1])  # 두 번째 줄 앞에 @@ 추가
+
+    # 나머지 줄 추가
+    if len(lines) > 2:
+        new_lines.extend(lines[2:])
+
+    return "\n".join(new_lines)
 
 # NIPA 작업 툴 창
 def open_nipa_window():
@@ -126,7 +156,8 @@ def open_nipa_window():
         "&& : 표시 글 제목 및 저자, 목차\n"
         "@@ : 글 본문 (참고문헌 포함)\n"
         "## : 머리말, 꼬리말 (페이지 번호만 있는 경우 포함)\n"
-        "$$ : 각주/미주"
+        "$$ : 각주/미주\n"
+        "%% : 단락이 시작되는 경우"
     )
     # 메모 텍스트 활성화 (ScrolledText로 변경)
     memo_label = tk.Label(root, text="메모:", font=("Arial", 12), justify=tk.LEFT)
@@ -158,6 +189,7 @@ def open_nipa_window():
         # 기호 교체 함수 실행
         output_data = replace_alternating_symbols(input_data)
         output_data = replace_symbols(output_data)  # 추가된 replace_symbols 적용
+        output_data = add_paragraph_symbol(output_data)  # 추가된 add_paragraph_symbol 적용
         # 결과를 출력 필드에 삽입
         output_text.config(state='normal')
         output_text.delete("1.0", tk.END)
