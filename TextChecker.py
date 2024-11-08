@@ -150,6 +150,14 @@ def open_nipa_window():
     # 링크 버튼을 생성
     link_button = tk.Button(root, text="https://buly.kr/BeJ74FT", fg="blue", cursor="hand2", command=open_link)
     link_button.pack(pady=10)
+
+        # 두 번째 링크 버튼 생성
+    def open_link2():
+        webbrowser.open("https://url.kr/ncigff")
+
+    link_button2 = tk.Button(root, text="https://url.kr/ncigff", fg="blue", cursor="hand2", command=open_link2)
+    link_button2.pack(pady=10)
+
     
     # 중요한 메모 텍스트 추가
     memo_text = (
@@ -158,6 +166,7 @@ def open_nipa_window():
         "## : 머리말, 꼬리말 (페이지 번호만 있는 경우 포함)\n"
         "$$ : 각주/미주\n"
         "%% : 단락이 시작되는 경우"
+        "### : 본문과 상관없는 내용 [ 주제어 / 키워드 / 논문투고일 / 저자설명 / 교신저자 설명 / * 전논문집의 오탈자 설명 등]"
     )
     # 메모 텍스트 활성화 (ScrolledText로 변경)
     memo_label = tk.Label(root, text="메모:", font=("Arial", 12), justify=tk.LEFT)
